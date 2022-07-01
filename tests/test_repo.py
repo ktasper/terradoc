@@ -1,7 +1,9 @@
 """
 Foo
 """
+import time
 import os
+import os.path
 import shutil
 from terradoc.repo.file import create_provider_folder, clone_repo
 class TestClass():
@@ -36,6 +38,7 @@ class TestClass():
 
     def test_clone_repo(self):
         """Foo"""
-        custom_path = "~/tmpDir/sudoku"
-        clone_repo("https://github.com/ktasper/sudoku.git",os.path.expanduser(custom_path))
-        assert False, "Finish the test"
+        custom_path = "~/tmpDir/terradoc"
+        file_to_check = "Readme.md"
+        clone_repo("https://github.com/ktasper/terradoc.git",os.path.expanduser(custom_path))
+        assert os.path.exists(os.path.expanduser(f"{custom_path}/{file_to_check}"))

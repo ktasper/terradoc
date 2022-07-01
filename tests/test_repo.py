@@ -1,7 +1,6 @@
 """
 Foo
 """
-import time
 import os
 import os.path
 import shutil

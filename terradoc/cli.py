@@ -28,7 +28,7 @@ def cli(config, verbose, debug):
     config.debug = debug
 
 @cli.command()
-@click.argument('provider', type=click.Choice(['aws','gcp'], case_sensitive=False), required=True)
+@click.argument('provider', type=click.Choice(['aws','gcp', 'terradoc'], case_sensitive=False), required=True)
 @click.option("--force", "-f", help="Force re-init of terradoc provider", is_flag=True)
 @pass_config
 def init(config, provider, force) :
@@ -39,7 +39,7 @@ def init(config, provider, force) :
     clone_provider(provider, terradoc_dir, config, force)
 
 @cli.command()
-@click.argument('provider', type=click.Choice(['aws','gcp'], case_sensitive=False), required=True)
+@click.argument('provider', type=click.Choice(['aws','gcp','terradoc'], case_sensitive=False), required=True)
 @pass_config
 def update_provider(config, provider) :
     """

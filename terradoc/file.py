@@ -9,7 +9,8 @@ from .helpers.outputs import debug_var
 
 git_urls = {
     "gcp": "https://github.com/hashicorp/terraform-provider-google.git",
-    "aws": "https://github.com/hashicorp/terraform-provider-aws.git"
+    "aws": "https://github.com/hashicorp/terraform-provider-aws.git",
+    "terradoc": "https://github.com/ktasper/terradoc.git"
     }
 
 def create_provider_folder(terradoc_dir):
@@ -38,7 +39,7 @@ def clone_provider(provider, terradoc_dir, config, force):
 
     if is_git_repo(path) and force is False:
         print (f"{path} already exists")
-        sys.exit(5)
+        sys.exit(6)
 
     # Now we can clone down the provider
     if config.debug:
@@ -60,11 +61,27 @@ def pull_provider(provider, terradoc_dir, config):
     """
     Git pulls the provider git repo
     """
-    terradoc_dir = f"{terradoc_dir}/{provider}/"
+    path = f"{terradoc_dir}/{provider}/"
     if config.debug:
         debug_var("Provider ", provider)
-        debug_var("Provider path ", terradoc_dir)
-    #TODO: Pull the repo so its up to date
+        debug_var("Provider path ", path)
+    # Check the dir exists
+    is_exist = os.path.exists(os.path.expanduser(path))
+    if not is_exist:
+        print (f"{path} does not exist, exiting")
+        sys.exit(5)
+    # Check the contents is actually a git repo
+    if not is_git_repo(path):
+        print (f"{path} is not a git repo, exiting")
+        sys.exit(6)
+
+    # Run git pull on the repo
+    if config.debug:
+        debug_var("Pulling git repo", path)
+    git_repo = git.cmd.Git(path)
+    git_repo.pull()
+
+
 
 
 def is_git_repo(path):

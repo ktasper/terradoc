@@ -2,3 +2,6 @@ __pycache__*
 .env*
 .pytest_cache*
 terradoc.egg-info*
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log

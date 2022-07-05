@@ -25,7 +25,7 @@ def create_provider_folder(terradoc_dir):
 
 def clone_provider(provider, terradoc_dir, config, force):
     """
-    Foo
+    Clones the git repo
     """
     # Set the terradoc_dir using the provider
     path = f"{terradoc_dir}/{provider}"
@@ -80,9 +80,6 @@ def pull_provider(provider, terradoc_dir, config):
         debug_var("Pulling git repo", path)
     git_repo = git.cmd.Git(path)
     git_repo.pull()
-
-
-
 
 def is_git_repo(path):
     """
